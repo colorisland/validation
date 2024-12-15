@@ -49,7 +49,7 @@ public class ValidationItemControllerV2 {
 
         // 검증 로직.(단일)
         if (!StringUtils.hasText(item.getItemName())) {
-            // 에러메시지 자동화. 이렇게 전달하면 requires.itemName 이런식으로 에러메시지에 접근하는 것이다.
+            // 에러메시지 자동화. 이렇게 전달하면 required.itemName 이런식으로 에러메시지에 접근하는 것이다.
             bindingResult.rejectValue("itemName","required");
         }
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
@@ -73,7 +73,7 @@ public class ValidationItemControllerV2 {
         // 검증에 실패하면 다시 입력 폼으로 이동.
         // bindingResult 를 사용하면 에러가 있는지 hasError 로 확인할 수 있고, model 에 안담아줘도 자동으로 뷰 파일에 넘어간다.
         if (bindingResult.hasErrors()) {
-            log.error("item{}",item.getPrice());
+            log.error("item {}",item.getPrice());
             return "validation/v2/addForm";
         }
         Item savedItem = itemRepository.save(item);
